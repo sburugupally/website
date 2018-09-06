@@ -1,0 +1,35 @@
+.centered-images {
+    text-align: left;
+	margin-left: 50px;
+	text-size:100px;
+}
+.heading
+{
+	color: blue;
+}
+.container
+{
+	width:500px;
+}
+.right
+{
+	width:250px;
+	float:right;
+}
+ul
+{
+	color:red;
+	font-size: 10px;
+}
+button
+{
+	position: relative;
+	float: right;
+	right:300px;
+	height:30px;
+	width:150px;
+}
+button:hover
+{
+	background-color:red;
+}

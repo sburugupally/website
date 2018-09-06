@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="icon" href="https://www.apherald.com/ImageStore/images/politics/politics_latestnews/telugualphabets415x250.jpg">
+<link rel="stylesheet" href="{% static 'main.css' %}" type="text/css">
+<title> వెబ్ పేజీ </title>
+</head>
+<div class ="border"></div>
+<div class ="heading">
+<h1><center>  నేటి పదం </center></h1>
+</div>
+<div class='centered-images'> 
+<section>
+    <img src="https://1.bp.blogspot.com/-lbtNLbKptS4/WqvCocWgyvI/AAAAAAAAC3c/NkV-urjQyRwT6T3kBwRd-N1osjkUgKo4wCLcBGAs/s1600/%25E0%25B1%2581%25E0%25B0%25B9%25E0%25B0%25B2.JPG" width="700px" height="400px">
+   <a ><button  href="#" data-toggle="modal" data-target="#subscribe_model">subscriber !</button></a>
+</section>
+</div>
+</body>
+<div class="container">
+	<div class="right"> </div>
+</div>
+<section>
+<span style="text-decoration: underline;"> <h4> పదం:</h4> </span>
+<ul>
+    పదజాలం
+</ul>
+<span style="text-decoration: underline;"> <h4>ఆ పదం యొక్క అర్థం:</h4> </span>
+<ul>
+        ఒక భాషలోని పదాలు లేదా మీరు తెలుసుకోవడానికి ప్రయత్నిస్తున్న ప్రత్యేక పదాల పదాలు....
+</ul>
+<span style="text-decoration: underline;"> <h4>ఆ పదం యొక్క ఉదాహరణ:</h4> </span>
+<ul>
+        ఆ వ్యక్తి పదజాలం ఆశ్చర్యకరమైనది ..
+</ul>
+<span style="text-decoration: underline;"> <h4>ఆ పదం యొక్క పర్యాయపదాలు:</h4> </span>
+<ul>
+        మాటతీరు,సంభాషణ
+</ul>
+    
+<span style="text-decoration: underline;"> <h4>ఆ పదం యొక్క ఉపయోగం:</h4> </span>
+<ul>
+      మనం అందరం మాట్లాడుతున్నప్పుడు మన పదజాలం తప్పనిసరిగా ఉండాలి..!!
+
+</ul>
+</section>
+
+
+<div class="modal fade" id="subscribe_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Subscribe </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    {% csrf_token  %}
+                <br>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield_label">Name :</label>
+                        <input class="mdl-textfield_input" id="name" type="text" placeholder="Name"/>
+                        <!--<span class="mdl-textfield_error"></span>-->
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield_label">Email-Id:</label>
+                        <input class="mdl-textfield_input" id="email" type="text" placeholder="mail@gmail.com"/>
+                        <!--<span class="mdl-textfield_error"></span>-->
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield_label">Nationality:</label>
+                        <input class="mdl-textfield_input" id="country" type="text" placeholder="country"/>
+                    </div>
+                    <br/>
+                     <button type="submit" value="submit" id="add-data" class="btn btn-primary"
+                            onclick=postdata()>Submit</button>
+                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
+        }
+    }
+     });
+     function postdata()
+    {
+    console.log('workig')
+        $.ajax({
+                    type: 'POST',
+                    url: "{% url 'post-data' %}",
+                    data:{
+                            'emailId': $('#email').val(),
+                            'name':  $('#name').val(),
+                            'country': $('#country').val(),
+                          },
+                    success: function( data )
+                                    {
+                                        $('#result').html(data.message);
+                                        $("#result").addClass("alert alert-success offset4 span4");
+                                        console.log(name)
+                                        console.log(data);
+                                        window.location.href = '';
+                                    }
+              });
+    }
+
+</script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</body>
+</html>
+
+
+
+
+
+
